@@ -36,11 +36,13 @@ npm run dev
    - `JWT_SECRET` – long random string (e.g. 32+ chars) for production
    - **Optional (email):** `RESEND_API_KEY`, `FROM_EMAIL` (e.g. `DFlow <noreply@yourdomain.com>`)
 
-3. **Deploy** – Railway will run `npm run build` then `npm run start`. Next.js listens on the `PORT` Railway provides.
+3. **Node version** – The app needs Node 20+ (Next.js 16 requirement). The repo has `engines.node` in `package.json` and a `.nvmrc` with `20`. If the build still uses Node 18, add a **Variable** in Railway: `NIXPACKS_NODE_VERSION` = `20`.
 
-4. **Domain** – In Railway, add a domain (e.g. `yourapp.up.railway.app`) under your service’s Settings → Networking.
+4. **Deploy** – Railway runs `npm run build` then the start command from `railway.toml` (`next start -p ${PORT:-3000}`). The app listens on the `PORT` Railway sets.
 
-The repo includes a `railway.toml` so build and start commands are explicit. No other config is required.
+5. **Domain** – In your service go to **Settings → Networking**, add a **Public domain** (e.g. `yourapp.up.railway.app`).
+
+**If the app doesn’t start:** ensure all required variables are set (`MONGODB_URI`, `DATABASE_NAME`, `JWT_SECRET`). Check the **Deployments** tab logs for build or runtime errors.
 
 ## Features (MVP)
 

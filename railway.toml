@@ -5,6 +5,7 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "npm run start"
+# Railway sets PORT; Next.js must listen on it (Linux container, so $PORT is set)
+startCommand = "next start -p ${PORT:-3000}"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
