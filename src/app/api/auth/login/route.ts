@@ -1,0 +1,48 @@
+import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
+import { connectDB } from "@/lib/db";
+import { signToken } from "@/lib/auth";
+import User from "@/models/User";
+import Company from "@/models/Company";
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const { email, password } = body;
+    if (!email || !password) {
+      return NextResponse.json({ error: "Missing email or password" }, { status: 400 });
+    }
+    await connectDB();
+    const user = await User.findOne({ email }).lean();
+    if (!user) {
+      return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
+    }
+    const ok = await bcrypt.compare(password, user.passwordHash);
+    if (!ok) {
+      return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
+    }
+    const company = await Company.findById(user.companyId).lean();
+    const token = signToken({
+      userId: user._id.toString(),
+      companyId: user.companyId.toString(),
+      email: user.email,
+      role: user.role as "owner" | "admin" | "manager" | "staff",
+    });
+    const res = NextResponse.json({
+      user: {
+        id: user._id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        companyId: user.companyId,
+        companyName: company?.name,
+      },
+      token,
+    });
+    res.cookies.set("token", token, { httpOnly: true, path: "/", maxAge: 60 * 60 * 24 * 7, sameSite: "lax" });
+    return res;
+  } catch (e) {
+    console.error(e);
+    return NextResponse.json({ error: "Login failed" }, { status: 500 });
+  }
+}
