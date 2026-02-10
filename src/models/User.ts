@@ -14,5 +14,5 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.index({ companyId: 1 });
-userSchema.index({ email: 1 });
+// email index is created automatically by unique: true
 export default mongoose.models.User || mongoose.model("User", userSchema);

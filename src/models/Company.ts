@@ -8,5 +8,5 @@ const companySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-companySchema.index({ slug: 1 });
+// slug index is created automatically by unique: true
 export default mongoose.models.Company || mongoose.model("Company", companySchema);
