@@ -15,7 +15,7 @@ export default function SettingsPage() {
 
   // Seed from auth user when available (defer to avoid setState-in-effect warning)
   useEffect(() => {
-    if (user?.companyName) queueMicrotask(() => setName(user.companyName));
+    if (user?.companyName) queueMicrotask(() => setName(user.companyName ?? ""));
   }, [user?.companyName]);
 
   useEffect(() => {
