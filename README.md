@@ -26,6 +26,22 @@ npm run dev
 
 3. Open [http://localhost:3000](http://localhost:3000). Sign up to create a company and start using the dashboard.
 
+## Deploying to Railway
+
+1. **Create a project** on [Railway](https://railway.app) and connect this repo (or push to a repo Railway can access).
+
+2. **Set environment variables** in the Railway service (Variables tab). Use the same names as `.env.example`:
+   - `MONGODB_URI` – MongoDB Atlas (or other) connection string
+   - `DATABASE_NAME` – e.g. `enterpriseapp`
+   - `JWT_SECRET` – long random string (e.g. 32+ chars) for production
+   - **Optional (email):** `RESEND_API_KEY`, `FROM_EMAIL` (e.g. `DFlow <noreply@yourdomain.com>`)
+
+3. **Deploy** – Railway will run `npm run build` then `npm run start`. Next.js listens on the `PORT` Railway provides.
+
+4. **Domain** – In Railway, add a domain (e.g. `yourapp.up.railway.app`) under your service’s Settings → Networking.
+
+The repo includes a `railway.toml` so build and start commands are explicit. No other config is required.
+
 ## Features (MVP)
 
 - **Auth:** Sign up (creates company + owner), login, logout

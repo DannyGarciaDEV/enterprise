@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
     const users = await User.find({ companyId: auth!.companyId })
       .select("_id name email role")
       .lean();
-    const list = users.filter((u) => u._id.toString() !== auth!.userId);
+    const list = users.filter((u) => String((u as { _id: unknown })._id) !== auth!.userId);
     return NextResponse.json(list);
   } catch (e) {
     console.error(e);

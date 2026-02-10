@@ -21,23 +21,27 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Service unavailable" }, { status: 503 });
   }
   try {
-    const user = await User.findById(auth.userId).select("-passwordHash").lean();
-    if (!user) return NextResponse.json({ error: "User not found" }, { status: 404 });
+    const userDoc = await User.findById(auth.userId).select("-passwordHash").lean();
+    if (!userDoc || Array.isArray(userDoc)) return NextResponse.json({ error: "User not found" }, { status: 404 });
+    type UserLean = { _id: mongoose.Types.ObjectId; email: string; name: string; companyId: mongoose.Types.ObjectId; role: string };
+    const user = userDoc as unknown as UserLean;
     const companyId = user.companyId?.toString?.() ?? user.companyId;
-    const [company, myEmployee] = await Promise.all([
+    const [companyDoc, myEmployeeDoc] = await Promise.all([
       companyId ? Company.findById(companyId).lean() : null,
       companyId ? Employee.findOne({ companyId, email: user.email }).select("_id").lean() : null,
     ]);
+    const company = companyDoc && !Array.isArray(companyDoc) ? (companyDoc as { name?: string }) : null;
+    const myEmployee = myEmployeeDoc && !Array.isArray(myEmployeeDoc) ? (myEmployeeDoc as { _id?: mongoose.Types.ObjectId }) : null;
     const companyNotFound = !company;
     const payload = {
-      _id: (user._id as mongoose.Types.ObjectId).toString(),
+      _id: user._id.toString(),
       email: user.email,
       name: user.name,
       role: user.role,
       companyId: companyId ?? "",
       companyName: company?.name ?? null,
       companyNotFound,
-      myEmployeeId: myEmployee?._id ? (myEmployee._id as mongoose.Types.ObjectId).toString() : null,
+      myEmployeeId: myEmployee?._id ? myEmployee._id.toString() : null,
     };
     return NextResponse.json(payload);
   } catch (e) {

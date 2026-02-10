@@ -46,9 +46,10 @@ export async function PATCH(
       .populate("destinationStoreId", "name location")
       .populate("receivedById", "name")
       .lean();
-    if (!doc) return NextResponse.json({ error: "Not found" }, { status: 404 });
+    if (!doc || Array.isArray(doc)) return NextResponse.json({ error: "Not found" }, { status: 404 });
     if (body.status === "received") {
-      const storeName = doc.destinationStoreId && typeof doc.destinationStoreId === "object" && "name" in doc.destinationStoreId ? doc.destinationStoreId.name : null;
+      const dest = (doc as { destinationStoreId?: { name?: string } }).destinationStoreId;
+      const storeName = dest && typeof dest === "object" && "name" in dest ? dest.name : null;
       await logActivity(
         auth!.companyId,
         "shipment_received",

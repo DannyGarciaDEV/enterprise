@@ -54,11 +54,12 @@ export async function PATCH(
       .populate("assigneeId", "name email")
       .populate("createdById", "name")
       .lean();
-    if (!doc) return NextResponse.json({ error: "Not found" }, { status: 404 });
+    if (!doc || Array.isArray(doc)) return NextResponse.json({ error: "Not found" }, { status: 404 });
+    const taskDoc = doc as unknown as { title: string };
     if (body.status === "done") {
-      await logActivity(auth!.companyId, "task_completed", `Task "${doc.title}" completed`, auth!.userId, { taskId: id });
+      await logActivity(auth!.companyId, "task_completed", `Task "${taskDoc.title}" completed`, auth!.userId, { taskId: id });
     } else {
-      await logActivity(auth!.companyId, "task_updated", `Task "${doc.title}" updated`, auth!.userId, { taskId: id });
+      await logActivity(auth!.companyId, "task_updated", `Task "${taskDoc.title}" updated`, auth!.userId, { taskId: id });
     }
     return NextResponse.json(doc);
   } catch (e) {

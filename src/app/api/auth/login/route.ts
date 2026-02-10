@@ -13,18 +13,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing email or password" }, { status: 400 });
     }
     await connectDB();
-    const user = await User.findOne({ email }).lean();
-    if (!user) {
+    const found = await User.findOne({ email }).lean();
+    if (!found || Array.isArray(found)) {
       return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
     }
+    type UserLean = { _id: unknown; email: string; passwordHash: string; name: string; companyId: unknown; role: string };
+    const user = found as unknown as UserLean;
     const ok = await bcrypt.compare(password, user.passwordHash);
     if (!ok) {
       return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
     }
-    const company = await Company.findById(user.companyId).lean();
+    const companyDoc = await Company.findById(user.companyId).lean();
+    const company = companyDoc && !Array.isArray(companyDoc) ? (companyDoc as { name?: string }) : null;
     const token = signToken({
-      userId: user._id.toString(),
-      companyId: user.companyId.toString(),
+      userId: String(user._id),
+      companyId: String(user.companyId),
       email: user.email,
       role: user.role as "owner" | "admin" | "manager" | "staff",
     });
@@ -35,7 +38,7 @@ export async function POST(req: NextRequest) {
         name: user.name,
         role: user.role,
         companyId: user.companyId,
-        companyName: company?.name,
+        companyName: company?.name ?? undefined,
       },
       token,
     });

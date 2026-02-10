@@ -14,11 +14,12 @@ export async function GET(req: NextRequest) {
       .populate("assigneeId", "name email")
       .populate("createdById", "name")
       .lean();
+    type TaskLean = { priority?: string; dueDate?: Date };
     list.sort((a, b) => {
-      const p = (priorityOrder[(a as { priority?: string }).priority as keyof typeof priorityOrder] ?? 1) - (priorityOrder[(b as { priority?: string }).priority as keyof typeof priorityOrder] ?? 1);
+      const p = (priorityOrder[(a as unknown as TaskLean).priority as keyof typeof priorityOrder] ?? 1) - (priorityOrder[(b as unknown as TaskLean).priority as keyof typeof priorityOrder] ?? 1);
       if (p !== 0) return p;
-      const dA = (a as { dueDate?: Date }).dueDate ? new Date((a as { dueDate: Date }).dueDate).getTime() : Infinity;
-      const dB = (b as { dueDate?: Date }).dueDate ? new Date((b as { dueDate: Date }).dueDate).getTime() : Infinity;
+      const dA = (a as unknown as TaskLean).dueDate ? new Date((a as unknown as TaskLean).dueDate!).getTime() : Infinity;
+      const dB = (b as unknown as TaskLean).dueDate ? new Date((b as unknown as TaskLean).dueDate!).getTime() : Infinity;
       return dA - dB;
     });
     return NextResponse.json(list);

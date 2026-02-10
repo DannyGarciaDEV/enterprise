@@ -18,8 +18,8 @@ export async function GET(req: NextRequest) {
     const startOfMonth = new Date();
     startOfMonth.setDate(1);
     startOfMonth.setHours(0, 0, 0, 0);
-    const myEmployee = await Employee.findOne({ companyId, email: auth!.email }).select("_id").lean();
-    const myEmployeeId = myEmployee?._id;
+    const myEmployeeDoc = await Employee.findOne({ companyId, email: auth!.email }).select("_id").lean();
+    const myEmployeeId = myEmployeeDoc && !Array.isArray(myEmployeeDoc) ? (myEmployeeDoc as { _id: unknown })._id : undefined;
 
     const [employeeCount, activeShipments, stores, upcomingEvents, recentShipments, emailsThisMonth, recentActivity, myTasks] = await Promise.all([
       Employee.countDocuments({ companyId, status: "active" }),
