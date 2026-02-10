@@ -40,7 +40,7 @@ export default function DashboardLayout({
 
   useEffect(() => {
     if (loading) {
-      setLoadingTimedOut(false);
+      queueMicrotask(() => setLoadingTimedOut(false));
       timeoutRef.current = setTimeout(() => {
         setLoadingTimedOut(true);
         if (pathname !== "/dashboard") router.replace("/dashboard");

@@ -55,9 +55,7 @@ export default function ShipmentsPage() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (searchParams.get("add") === "1") setShowForm(true);
-  }, [searchParams]);
+  const showFormPanel = showForm || searchParams.get("add") === "1";
 
   const openEdit = (s: Shipment) => {
     setEditing(s);
@@ -133,7 +131,7 @@ export default function ShipmentsPage() {
         </button>
       </div>
 
-      {showForm && (
+      {showFormPanel && (
         <div className="bg-white rounded-xl border border-slate-200 p-5">
           <h2 className="font-semibold text-slate-800 mb-4">{editing ? "Edit shipment" : "New shipment"}</h2>
           <form onSubmit={save} className="grid grid-cols-1 sm:grid-cols-2 gap-4">

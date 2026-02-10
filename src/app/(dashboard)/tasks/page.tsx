@@ -53,9 +53,7 @@ export default function TasksPage() {
     load();
   }, []);
 
-  useEffect(() => {
-    if (sp.get("add") === "1") setShowForm(true);
-  }, [sp]);
+  const showFormPanel = showForm || sp.get("add") === "1";
 
   const openEdit = (t: Task) => {
     setEditing(t);
@@ -139,7 +137,7 @@ export default function TasksPage() {
         </div>
       </div>
 
-      {showForm && (
+      {showFormPanel && (
         <div className="bg-white rounded-xl border border-slate-200 p-5">
           <h2 className="font-semibold text-slate-800 mb-4">{editing ? "Edit task" : "Create task"}</h2>
           <form onSubmit={save} className="grid grid-cols-1 sm:grid-cols-2 gap-4">

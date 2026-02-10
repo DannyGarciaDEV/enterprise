@@ -150,7 +150,7 @@ export default function ChatPage() {
   const selectedUserId = selected?.type === "user" ? selected.id : null;
   useEffect(() => {
     if (!selectedUserId) {
-      setMessages([]);
+      queueMicrotask(() => setMessages([]));
       return;
     }
     const load = () => {

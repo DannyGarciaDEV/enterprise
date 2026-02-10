@@ -58,24 +58,24 @@ describe("auth", () => {
 
   describe("getAuthFromRequest", () => {
     it("returns null when no Authorization header", () => {
-      const req = { headers: { get: () => null } };
-      const auth = getAuthFromRequest(req as any);
+      const req = { headers: { get: () => null } } as unknown as Parameters<typeof getAuthFromRequest>[0];
+      const auth = getAuthFromRequest(req);
       expect(auth).toBeNull();
     });
 
     it("returns null when Authorization does not start with Bearer ", () => {
       const req = {
         headers: { get: (name: string) => (name === "authorization" ? "Basic xyz" : null) },
-      };
-      expect(getAuthFromRequest(req as any)).toBeNull();
+      } as unknown as Parameters<typeof getAuthFromRequest>[0];
+      expect(getAuthFromRequest(req)).toBeNull();
     });
 
     it("returns payload when valid Bearer token", () => {
       const token = signToken(payload);
       const req = {
         headers: { get: (name: string) => (name === "authorization" ? `Bearer ${token}` : null) },
-      };
-      const auth = getAuthFromRequest(req as any);
+      } as unknown as Parameters<typeof getAuthFromRequest>[0];
+      const auth = getAuthFromRequest(req);
       expect(auth).not.toBeNull();
       expect(auth?.userId).toBe(payload.userId);
     });

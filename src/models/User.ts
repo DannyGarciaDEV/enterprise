@@ -4,7 +4,7 @@ export type Role = "owner" | "admin" | "manager" | "staff";
 
 const userSchema = new mongoose.Schema(
   {
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true },
     passwordHash: { type: String, required: true },
     name: { type: String, required: true },
     companyId: { type: mongoose.Schema.Types.ObjectId, ref: "Company", required: true },
@@ -14,5 +14,5 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.index({ companyId: 1 });
-// email index is created automatically by unique: true
+userSchema.index({ email: 1 }, { unique: true });
 export default mongoose.models.User || mongoose.model("User", userSchema);

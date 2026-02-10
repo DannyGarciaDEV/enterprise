@@ -9,8 +9,6 @@ import {
   type Role,
 } from "../permissions";
 
-const roles: Role[] = ["owner", "admin", "manager", "staff"];
-
 describe("permissions", () => {
   describe("canManageCompany", () => {
     it("returns true for owner and admin only", () => {

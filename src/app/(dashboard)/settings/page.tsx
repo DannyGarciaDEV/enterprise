@@ -13,9 +13,9 @@ export default function SettingsPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  // Seed from auth user immediately so the field is never empty
+  // Seed from auth user when available (defer to avoid setState-in-effect warning)
   useEffect(() => {
-    if (user?.companyName) setName(user.companyName);
+    if (user?.companyName) queueMicrotask(() => setName(user.companyName));
   }, [user?.companyName]);
 
   useEffect(() => {
