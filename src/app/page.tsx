@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
@@ -57,45 +56,37 @@ export default function HomePage() {
       </header>
 
       <main>
-        {/* Hero: 7.png (black) with white and red */}
-        <section className="relative min-h-[85vh] flex items-center justify-center px-4 sm:px-6 pt-20 overflow-hidden">
-          <div className="absolute inset-0">
-            <Image src="/7.png" alt="" fill className="object-cover" priority sizes="100vw" />
-            <div className="absolute inset-0 bg-black/50" />
-          </div>
-          <div className="relative z-10 mx-auto max-w-3xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+        {/* Hero */}
+        <section className="min-h-[85vh] flex items-center justify-center px-4 sm:px-6 pt-20 bg-grid-pattern">
+          <div className="mx-auto max-w-3xl text-center">
+            <h1 className="text-4xl font-bold tracking-tight text-[var(--foreground)] sm:text-5xl md:text-6xl">
               DFlow
             </h1>
-            <p className="mt-4 text-xl text-white/90 sm:text-2xl font-medium">
+            <p className="mt-4 text-xl text-[var(--muted)] sm:text-2xl font-medium">
               Operations in one place
             </p>
-            <p className="mt-6 text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-6 text-lg text-[var(--muted)] max-w-2xl mx-auto leading-relaxed">
               One workspace for your whole company: tasks, team, shipments, stores, events, chat, and email. Stop switching tools—run the day from DFlow.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/signup" className="w-full sm:w-auto rounded-xl bg-red-500 px-6 py-3.5 text-base font-medium text-white hover:bg-red-400 transition-all btn-glow">
+              <Link href="/signup" className="w-full sm:w-auto rounded-xl bg-[var(--accent)] px-6 py-3.5 text-base font-medium text-white hover:opacity-90 transition-all btn-glow">
                 Start free
               </Link>
-              <Link href="/login" className="w-full sm:w-auto rounded-xl border border-white/40 bg-white/10 px-6 py-3.5 text-base font-medium text-white hover:bg-white/20 transition-colors">
+              <Link href="/login" className="w-full sm:w-auto rounded-xl border border-[var(--border)] bg-[var(--surface)] px-6 py-3.5 text-base font-medium text-[var(--foreground)] hover:bg-[var(--surface-hover)] transition-colors">
                 Log in
               </Link>
             </div>
           </div>
         </section>
 
-        {/* What is DFlow — on 7.png with white/red */}
-        <section className="relative py-20 sm:py-28 px-4 sm:px-6 overflow-hidden">
-          <div className="absolute inset-0">
-            <Image src="/7.png" alt="" fill className="object-cover object-center" sizes="100vw" />
-            <div className="absolute inset-0 bg-black/60" />
-          </div>
-          <div className="relative z-10 mx-auto max-w-3xl text-center">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">What is DFlow?</h2>
-            <p className="mt-6 text-white/85 leading-relaxed text-lg">
+        {/* What is DFlow */}
+        <section className="py-20 sm:py-28 px-4 sm:px-6 border-t border-[var(--border)] bg-[var(--background)]">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-2xl font-bold text-[var(--foreground)] sm:text-3xl">What is DFlow?</h2>
+            <p className="mt-6 text-[var(--muted)] leading-relaxed text-lg">
               DFlow is a business operations platform for companies. Use it to manage daily work in one place: assign and track tasks, keep your employee roster and stores organized, log shipments, schedule events, chat with your team, and send emails—all with one login. Data is scoped by company, so every team sees only what belongs to them. Built for owners, admins, managers, and staff who want less tool-hopping and more clarity.
             </p>
-            <p className="mt-4 text-red-400 font-medium">One platform. Your operations.</p>
+            <p className="mt-4 text-[var(--accent)] font-medium">One platform. Your operations.</p>
           </div>
         </section>
 
