@@ -1,6 +1,23 @@
 @import "tailwindcss";
 
+/* Light mode (default when .dark is not set) */
 :root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --surface: #ffffff;
+  --surface-hover: #f1f5f9;
+  --border: rgba(239, 68, 68, 0.25);
+  --accent: #ef4444;
+  --accent-dim: #dc2626;
+  --glow: 0 0 20px rgba(239, 68, 68, 0.2);
+  --glow-strong: 0 0 30px rgba(239, 68, 68, 0.35);
+  --muted: #64748b;
+  --grid-line: rgba(239, 68, 68, 0.06);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+}
+
+/* Dark mode */
+.dark {
   --background: #050608;
   --foreground: #e2e8f0;
   --surface: #0f1219;
@@ -10,6 +27,9 @@
   --accent-dim: #dc2626;
   --glow: 0 0 20px rgba(239, 68, 68, 0.25);
   --glow-strong: 0 0 30px rgba(239, 68, 68, 0.4);
+  --muted: #94a3b8;
+  --grid-line: rgba(239, 68, 68, 0.03);
+  --glass-bg: rgba(15, 18, 25, 0.7);
 }
 
 @theme inline {
@@ -25,17 +45,17 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
-/* Futuristic grid background */
+/* Futuristic grid background - theme aware */
 .bg-grid-pattern {
   background-image:
-    linear-gradient(rgba(239, 68, 68, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(239, 68, 68, 0.03) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
-/* Glass panel */
+/* Glass panel - theme aware */
 .glass-panel {
-  background: rgba(15, 18, 25, 0.7);
+  background: var(--glass-bg);
   border: 1px solid var(--border);
   backdrop-filter: blur(12px);
 }
