@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050608;
+  --foreground: #e2e8f0;
+  --surface: #0f1219;
+  --surface-hover: #161b26;
+  --border: rgba(239, 68, 68, 0.2);
+  --accent: #ef4444;
+  --accent-dim: #dc2626;
+  --glow: 0 0 20px rgba(239, 68, 68, 0.25);
+  --glow-strong: 0 0 30px rgba(239, 68, 68, 0.4);
 }
 
 @theme inline {
@@ -12,15 +19,33 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
+
+/* Futuristic grid background */
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(rgba(239, 68, 68, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(239, 68, 68, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Glass panel */
+.glass-panel {
+  background: rgba(15, 18, 25, 0.7);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+/* Accent glow for buttons */
+.btn-glow {
+  box-shadow: var(--glow);
+}
+.btn-glow:hover {
+  box-shadow: var(--glow-strong);
+}
+
+/* Input focus - use ring-red-400/50 in components */
