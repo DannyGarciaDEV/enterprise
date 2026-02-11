@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
@@ -36,7 +37,7 @@ export default function HomePage() {
   if (user) return null;
 
   return (
-    <div className="min-h-screen bg-grid-pattern text-slate-200 font-sans">
+    <div className="min-h-screen text-slate-200 font-sans">
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-red-500/20 bg-[var(--background)]/80 backdrop-blur-xl">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
           <Link href="/" className="font-semibold text-red-400 text-lg tracking-tight">
@@ -54,13 +55,21 @@ export default function HomePage() {
       </header>
 
       <main>
-        <section className="pt-28 pb-20 sm:pt-36 sm:pb-28 px-4 sm:px-6">
-          <div className="mx-auto max-w-3xl text-center">
+        {/* Hero with 7.png background */}
+        <section className="relative min-h-[85vh] flex items-center justify-center px-4 sm:px-6 pt-20 overflow-hidden">
+          <div className="absolute inset-0">
+            <Image src="/7.png" alt="" fill className="object-cover" priority sizes="100vw" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#050608]/90 via-[#050608]/75 to-[#050608]" />
+          </div>
+          <div className="relative z-10 mx-auto max-w-3xl text-center">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
-              Operations in one place
+              DFlow
             </h1>
-            <p className="mt-5 text-lg text-slate-400 sm:text-xl">
-              DFlow keeps your company aligned: tasks, employees, shipments, stores, events, and chat—all in a single workspace.
+            <p className="mt-4 text-xl text-slate-300 sm:text-2xl font-medium">
+              Operations in one place
+            </p>
+            <p className="mt-6 text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+              One workspace for your whole company: tasks, team, shipments, stores, events, chat, and email. Stop switching tools—run the day from DFlow.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/signup" className="w-full sm:w-auto rounded-xl bg-red-500 px-6 py-3.5 text-base font-medium text-slate-950 hover:bg-red-400 transition-all btn-glow">
@@ -73,7 +82,22 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="border-t border-red-500/10 py-16 sm:py-20 px-4 sm:px-6">
+        {/* What is DFlow — clear explanation */}
+        <section className="relative py-20 sm:py-28 px-4 sm:px-6 overflow-hidden">
+          <div className="absolute inset-0">
+            <Image src="/8.png" alt="" fill className="object-cover" sizes="100vw" />
+            <div className="absolute inset-0 bg-[#050608]/85" />
+          </div>
+          <div className="relative z-10 mx-auto max-w-3xl text-center">
+            <h2 className="text-2xl font-bold text-white sm:text-3xl">What is DFlow?</h2>
+            <p className="mt-6 text-slate-300 leading-relaxed text-lg">
+              DFlow is a business operations platform for companies. Use it to manage daily work in one place: assign and track tasks, keep your employee roster and stores organized, log shipments, schedule events, chat with your team, and send emails—all with one login. Data is scoped by company, so every team sees only what belongs to them. Built for owners, admins, managers, and staff who want less tool-hopping and more clarity.
+            </p>
+          </div>
+        </section>
+
+        {/* Features grid */}
+        <section className="bg-grid-pattern border-t border-red-500/10 py-16 sm:py-20 px-4 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <h2 className="text-center text-2xl font-bold text-white sm:text-3xl">Everything your team needs</h2>
             <p className="mx-auto mt-3 max-w-xl text-center text-slate-400">One platform for daily operations, visibility, and collaboration.</p>
@@ -89,7 +113,8 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="py-16 sm:py-20 px-4 sm:px-6">
+        {/* CTA */}
+        <section className="py-16 sm:py-20 px-4 sm:px-6 bg-grid-pattern">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-2xl font-bold text-white sm:text-3xl">Ready to get started?</h2>
             <p className="mt-3 text-slate-400">Create your company and invite your team in minutes.</p>
@@ -102,7 +127,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      <footer className="border-t border-red-500/10 py-8 px-4 sm:px-6">
+      <footer className="border-t border-red-500/10 py-8 px-4 sm:px-6 bg-[var(--background)]">
         <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4">
           <span className="text-sm text-slate-500">© DFlow. Business operations platform.</span>
           <div className="flex items-center gap-6">
