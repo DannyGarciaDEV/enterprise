@@ -63,7 +63,7 @@ export default function MetricsPage() {
   if (loading) {
     return (
       <div className="max-w-4xl mx-auto">
-        <p className="text-slate-500">Loading metrics…</p>
+        <p className="text-[var(--muted)]">Loading metrics…</p>
       </div>
     );
   }
@@ -72,8 +72,8 @@ export default function MetricsPage() {
   if (user && !canViewMetrics(role)) {
     return (
       <div className="max-w-xl mx-auto p-6">
-        <p className="text-slate-600">You don’t have permission to view metrics. Only Owner and Admin can access this page.</p>
-        <button onClick={() => router.push("/dashboard")} className="mt-4 text-red-600 font-medium hover:underline">Back to Dashboard</button>
+        <p className="text-[var(--muted)]">You don’t have permission to view metrics. Only Owner and Admin can access this page.</p>
+        <button onClick={() => router.push("/dashboard")} className="mt-4 text-[var(--accent)] font-medium hover:underline">Back to Dashboard</button>
       </div>
     );
   }
@@ -85,33 +85,33 @@ export default function MetricsPage() {
   return (
     <div className="max-w-5xl mx-auto space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-white">Metrics</h1>
-        <p className="text-slate-400 mt-1">Overview of your company activity</p>
+        <h1 className="text-2xl font-bold text-[var(--foreground)]">Metrics</h1>
+        <p className="text-[var(--muted)] mt-1">Overview of your company activity</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="glass-panel rounded-xl p-5">
-          <p className="text-sm text-slate-400">Emails sent (total)</p>
-          <p className="text-2xl font-bold text-red-400 mt-1">{data?.emails?.total ?? 0}</p>
+          <p className="text-sm text-[var(--muted)]">Emails sent (total)</p>
+          <p className="text-2xl font-bold text-[var(--accent)] mt-1">{data?.emails?.total ?? 0}</p>
         </div>
         <div className="glass-panel rounded-xl p-5">
-          <p className="text-sm text-slate-400">Emails this month</p>
-          <p className="text-2xl font-bold text-red-400 mt-1">{data?.emails?.thisMonth ?? 0}</p>
+          <p className="text-sm text-[var(--muted)]">Emails this month</p>
+          <p className="text-2xl font-bold text-[var(--accent)] mt-1">{data?.emails?.thisMonth ?? 0}</p>
         </div>
         <div className="glass-panel rounded-xl p-5">
-          <p className="text-sm text-slate-400">Active employees</p>
-          <p className="text-2xl font-bold text-red-400 mt-1">{data?.employees ?? 0}</p>
+          <p className="text-sm text-[var(--muted)]">Active employees</p>
+          <p className="text-2xl font-bold text-[var(--accent)] mt-1">{data?.employees ?? 0}</p>
         </div>
         <div className="glass-panel rounded-xl p-5">
-          <p className="text-sm text-slate-400">Total shipments</p>
-          <p className="text-2xl font-bold text-red-400 mt-1">{data?.shipments ?? 0}</p>
+          <p className="text-sm text-[var(--muted)]">Total shipments</p>
+          <p className="text-2xl font-bold text-[var(--accent)] mt-1">{data?.shipments ?? 0}</p>
         </div>
       </div>
 
       {/* Emails over time */}
       <div className="glass-panel rounded-xl p-5">
-        <h2 className="font-semibold text-white mb-1">Emails sent (last 30 days)</h2>
-        <p className="text-sm text-slate-400 mb-4">Daily volume of emails sent from the app</p>
+        <h2 className="font-semibold text-[var(--foreground)] mb-1">Emails sent (last 30 days)</h2>
+        <p className="text-sm text-[var(--muted)] mb-4">Daily volume of emails sent from the app</p>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={emailsPerDay} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
@@ -134,8 +134,8 @@ export default function MetricsPage() {
       {/* Shipments & events side by side */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="glass-panel rounded-xl p-5">
-          <h2 className="font-semibold text-white mb-1">Shipments created (last 30 days)</h2>
-          <p className="text-sm text-slate-400 mb-4">New shipments logged per day</p>
+          <h2 className="font-semibold text-[var(--foreground)] mb-1">Shipments created (last 30 days)</h2>
+          <p className="text-sm text-[var(--muted)] mb-4">New shipments logged per day</p>
           <div className="h-56">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={shipmentsPerDay} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
@@ -149,8 +149,8 @@ export default function MetricsPage() {
           </div>
         </div>
         <div className="glass-panel rounded-xl p-5">
-          <h2 className="font-semibold text-white mb-1">Events scheduled (last 30 days)</h2>
-          <p className="text-sm text-slate-400 mb-4">Events by date (scheduled date)</p>
+          <h2 className="font-semibold text-[var(--foreground)] mb-1">Events scheduled (last 30 days)</h2>
+          <p className="text-sm text-[var(--muted)] mb-4">Events by date (scheduled date)</p>
           <div className="h-56">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={eventsPerDay} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
@@ -167,8 +167,8 @@ export default function MetricsPage() {
 
       {/* Combined overview line chart */}
       <div className="glass-panel rounded-xl p-5">
-        <h2 className="font-semibold text-white mb-1">Activity overview (last 30 days)</h2>
-        <p className="text-sm text-slate-400 mb-4">Emails, shipments, and events in one view</p>
+        <h2 className="font-semibold text-[var(--foreground)] mb-1">Activity overview (last 30 days)</h2>
+        <p className="text-sm text-[var(--muted)] mb-4">Emails, shipments, and events in one view</p>
         <div className="h-72">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart margin={{ top: 8, right: 8, left: 0, bottom: 0 }} data={emailsPerDay.map((e, i) => ({
@@ -191,33 +191,33 @@ export default function MetricsPage() {
       </div>
 
       <div className="glass-panel rounded-xl overflow-hidden">
-        <div className="px-4 py-3 border-b border-red-500/20 bg-slate-800/50">
-          <h2 className="font-semibold text-white">Recent emails sent</h2>
-          <p className="text-sm text-slate-400">Last 20 emails sent from the app</p>
+        <div className="px-4 py-3 border-b border-[var(--border)] bg-[var(--table-header)]">
+          <h2 className="font-semibold text-[var(--foreground)]">Recent emails sent</h2>
+          <p className="text-sm text-[var(--muted)]">Last 20 emails sent from the app</p>
         </div>
         <div className="overflow-x-auto">
           {!data?.emails?.recent?.length ? (
-            <p className="p-6 text-slate-500 text-sm">No emails sent yet. Send one from Chat when you message an employee.</p>
+            <p className="p-6 text-[var(--muted)] text-sm">No emails sent yet. Send one from Chat when you message an employee.</p>
           ) : (
             <table className="w-full">
-              <thead className="bg-slate-800/50 border-b border-red-500/20">
+              <thead className="bg-[var(--table-header)] border-b border-[var(--border)]">
                 <tr>
-                  <th className="text-left text-sm font-medium text-red-400 px-4 py-3">To</th>
-                  <th className="text-left text-sm font-medium text-red-400 px-4 py-3">Subject</th>
-                  <th className="text-left text-sm font-medium text-red-400 px-4 py-3">Sent by</th>
-                  <th className="text-left text-sm font-medium text-red-400 px-4 py-3">Date</th>
+                  <th className="text-left text-sm font-medium text-[var(--accent)] px-4 py-3">To</th>
+                  <th className="text-left text-sm font-medium text-[var(--accent)] px-4 py-3">Subject</th>
+                  <th className="text-left text-sm font-medium text-[var(--accent)] px-4 py-3">Sent by</th>
+                  <th className="text-left text-sm font-medium text-[var(--accent)] px-4 py-3">Date</th>
                 </tr>
               </thead>
               <tbody>
                 {data.emails.recent.map((email) => (
-                  <tr key={email._id} className="border-b border-red-500/10 hover:bg-slate-800/30">
-                    <td className="px-4 py-3 text-slate-200">
+                  <tr key={email._id} className="border-b border-[var(--border)] hover:bg-[var(--table-row-hover)]">
+                    <td className="px-4 py-3 text-[var(--foreground)]">
                       {email.toName ? `${email.toName} ` : ""}
-                      <span className="text-slate-500 text-sm">{email.to}</span>
+                      <span className="text-[var(--muted)] text-sm">{email.to}</span>
                     </td>
-                    <td className="px-4 py-3 text-slate-400 max-w-xs truncate">{email.subject}</td>
-                    <td className="px-4 py-3 text-slate-400">{email.fromUserId?.name ?? "—"}</td>
-                    <td className="px-4 py-3 text-slate-500 text-sm">
+                    <td className="px-4 py-3 text-[var(--muted)] max-w-xs truncate">{email.subject}</td>
+                    <td className="px-4 py-3 text-[var(--muted)]">{email.fromUserId?.name ?? "—"}</td>
+                    <td className="px-4 py-3 text-[var(--muted)] text-sm">
                       {new Date(email.sentAt).toLocaleString()}
                     </td>
                   </tr>

@@ -1,35 +1,45 @@
 @import "tailwindcss";
 
-/* Light mode (default when .dark is not set) */
+/* Light mode – softer, less bright */
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --surface: #ffffff;
-  --surface-hover: #f1f5f9;
-  --border: rgba(239, 68, 68, 0.25);
-  --accent: #ef4444;
-  --accent-dim: #dc2626;
-  --glow: 0 0 20px rgba(239, 68, 68, 0.2);
-  --glow-strong: 0 0 30px rgba(239, 68, 68, 0.35);
-  --muted: #64748b;
-  --grid-line: rgba(239, 68, 68, 0.06);
-  --glass-bg: rgba(255, 255, 255, 0.85);
+  --background: #eef2f6;
+  --foreground: #1e293b;
+  --surface: #f8fafc;
+  --surface-hover: #e2e8f0;
+  --input-bg: #ffffff;
+  --table-header: #f1f5f9;
+  --table-row-hover: #e2e8f0;
+  --border: rgba(185, 28, 28, 0.2);
+  --accent: #b91c1c;
+  --accent-dim: #991b1b;
+  --glow: 0 0 16px rgba(185, 28, 28, 0.15);
+  --glow-strong: 0 0 24px rgba(185, 28, 28, 0.25);
+  --muted: #475569;
+  --grid-line: rgba(185, 28, 28, 0.05);
+  --glass-bg: rgba(248, 250, 252, 0.9);
+  --error-bg: rgba(185, 28, 28, 0.08);
+  --error-border: rgba(185, 28, 28, 0.3);
 }
 
-/* Dark mode */
+/* Dark mode – softer dark, not pure black */
 .dark {
-  --background: #050608;
-  --foreground: #e2e8f0;
-  --surface: #0f1219;
-  --surface-hover: #161b26;
-  --border: rgba(239, 68, 68, 0.2);
-  --accent: #ef4444;
-  --accent-dim: #dc2626;
-  --glow: 0 0 20px rgba(239, 68, 68, 0.25);
-  --glow-strong: 0 0 30px rgba(239, 68, 68, 0.4);
+  --background: #1e293b;
+  --foreground: #cbd5e1;
+  --surface: #334155;
+  --surface-hover: #475569;
+  --input-bg: #1e293b;
+  --table-header: #334155;
+  --table-row-hover: #475569;
+  --border: rgba(248, 113, 113, 0.2);
+  --accent: #f87171;
+  --accent-dim: #fca5a5;
+  --glow: 0 0 20px rgba(248, 113, 113, 0.2);
+  --glow-strong: 0 0 28px rgba(248, 113, 113, 0.3);
   --muted: #94a3b8;
-  --grid-line: rgba(239, 68, 68, 0.03);
-  --glass-bg: rgba(15, 18, 25, 0.7);
+  --grid-line: rgba(248, 113, 113, 0.04);
+  --glass-bg: rgba(30, 41, 59, 0.85);
+  --error-bg: rgba(248, 113, 113, 0.1);
+  --error-border: rgba(248, 113, 113, 0.35);
 }
 
 @theme inline {

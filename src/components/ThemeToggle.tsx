@@ -20,7 +20,7 @@ export function ThemeToggle() {
         </>
       ) : (
         <>
-          <span className="text-slate-500" aria-hidden>☽</span>
+          <span className="text-[var(--muted)]" aria-hidden>☽</span>
           <span className="hidden sm:inline">Dark</span>
         </>
       )}

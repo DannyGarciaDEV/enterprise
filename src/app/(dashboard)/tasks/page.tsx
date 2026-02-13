@@ -117,21 +117,21 @@ export default function TasksPage() {
     <div className="max-w-5xl mx-auto space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white">Tasks</h1>
-          <p className="text-slate-400 mt-1">Assign and track work (e.g. Check shipment, Prepare event booth, Train new staff)</p>
+          <h1 className="text-2xl font-bold text-[var(--foreground)]">Tasks</h1>
+          <p className="text-[var(--muted)] mt-1">Assign and track work (e.g. Check shipment, Prepare event booth, Train new staff)</p>
         </div>
         <div className="flex items-center gap-3">
           {user?.myEmployeeId && (
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value as "all" | "mine")}
-              className="text-sm border border-red-500/30 rounded-lg px-3 py-2 bg-slate-900/80 text-red-400 focus:ring-1 focus:ring-red-400/50"
+              className="text-sm border border-[var(--border)] rounded-lg px-3 py-2 bg-[var(--input-bg)] text-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/50"
             >
               <option value="all">All tasks</option>
               <option value="mine">Assigned to me</option>
             </select>
           )}
-          <button onClick={() => setShowForm(true)} className="px-4 py-2 bg-red-500 text-slate-950 text-sm font-medium rounded-lg hover:bg-red-400 btn-glow">
+          <button onClick={() => setShowForm(true)} className="px-4 py-2 bg-[var(--accent)] text-[var(--foreground)] text-sm font-medium rounded-lg hover:opacity-90 btn-glow">
             Create task
           </button>
         </div>
@@ -139,30 +139,30 @@ export default function TasksPage() {
 
       {showFormPanel && (
         <div className="glass-panel rounded-xl p-5">
-          <h2 className="font-semibold text-white mb-4">{editing ? "Edit task" : "Create task"}</h2>
+          <h2 className="font-semibold text-[var(--foreground)] mb-4">{editing ? "Edit task" : "Create task"}</h2>
           <form onSubmit={save} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="sm:col-span-2">
-              <label className="block text-sm font-medium text-slate-300 mb-1">Title *</label>
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-1">Title *</label>
               <input
                 value={form.title}
                 onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
                 placeholder="e.g. Check shipment, Prepare event booth"
-                className="w-full px-3 py-2 rounded-lg bg-slate-900/80 border border-red-500/20 text-white placeholder-slate-500 focus:ring-2 focus:ring-red-400/50 focus:border-red-400/50"
+                className="w-full px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--border)] text-[var(--foreground)] placeholder-[var(--muted)] focus:ring-2 focus:ring-[var(--accent)]/50 focus:border-[var(--accent)]/50"
                 required
               />
             </div>
             <div className="sm:col-span-2">
-              <label className="block text-sm font-medium text-slate-300 mb-1">Description</label>
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-1">Description</label>
               <textarea
                 value={form.description}
                 onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
-                className="w-full px-3 py-2 rounded-lg bg-slate-900/80 border border-red-500/20 text-white placeholder-slate-500 focus:ring-2 focus:ring-red-400/50"
+                className="w-full px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--border)] text-[var(--foreground)] placeholder-[var(--muted)] focus:ring-2 focus:ring-[var(--accent)]/50"
                 rows={2}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1">Assign to</label>
-              <select value={form.assigneeId} onChange={(e) => setForm((f) => ({ ...f, assigneeId: e.target.value }))} className="w-full px-3 py-2 rounded-lg bg-slate-900/80 border border-red-500/20 text-white focus:ring-2 focus:ring-red-400/50">
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-1">Assign to</label>
+              <select value={form.assigneeId} onChange={(e) => setForm((f) => ({ ...f, assigneeId: e.target.value }))} className="w-full px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--border)] text-[var(--foreground)] focus:ring-2 focus:ring-[var(--accent)]/50">
                 <option value="">—</option>
                 {employees.map((emp) => (
                   <option key={emp._id} value={emp._id}>{emp.name}</option>
@@ -170,28 +170,28 @@ export default function TasksPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1">Due date</label>
-              <input type="date" value={form.dueDate} onChange={(e) => setForm((f) => ({ ...f, dueDate: e.target.value }))} className="w-full px-3 py-2 rounded-lg bg-slate-900/80 border border-red-500/20 text-white focus:ring-2 focus:ring-red-400/50" />
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-1">Due date</label>
+              <input type="date" value={form.dueDate} onChange={(e) => setForm((f) => ({ ...f, dueDate: e.target.value }))} className="w-full px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--border)] text-[var(--foreground)] focus:ring-2 focus:ring-[var(--accent)]/50" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1">Status</label>
-              <select value={form.status} onChange={(e) => setForm((f) => ({ ...f, status: e.target.value }))} className="w-full px-3 py-2 rounded-lg bg-slate-900/80 border border-red-500/20 text-white focus:ring-2 focus:ring-red-400/50">
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-1">Status</label>
+              <select value={form.status} onChange={(e) => setForm((f) => ({ ...f, status: e.target.value }))} className="w-full px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--border)] text-[var(--foreground)] focus:ring-2 focus:ring-[var(--accent)]/50">
                 {STATUSES.map((s) => (
                   <option key={s} value={s}>{s.replace("_", " ")}</option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1">Priority</label>
-              <select value={form.priority} onChange={(e) => setForm((f) => ({ ...f, priority: e.target.value }))} className="w-full px-3 py-2 rounded-lg bg-slate-900/80 border border-red-500/20 text-white focus:ring-2 focus:ring-red-400/50">
+              <label className="block text-sm font-medium text-[var(--foreground)] mb-1">Priority</label>
+              <select value={form.priority} onChange={(e) => setForm((f) => ({ ...f, priority: e.target.value }))} className="w-full px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--border)] text-[var(--foreground)] focus:ring-2 focus:ring-[var(--accent)]/50">
                 {PRIORITIES.map((p) => (
                   <option key={p} value={p}>{p}</option>
                 ))}
               </select>
             </div>
             <div className="sm:col-span-2 flex gap-2">
-              <button type="submit" className="px-4 py-2 bg-red-500 text-slate-950 rounded-lg hover:bg-red-400 btn-glow">{editing ? "Save" : "Create"}</button>
-              <button type="button" onClick={closeForm} className="px-4 py-2 border border-red-500/40 text-red-400 rounded-lg hover:bg-red-500/10">Cancel</button>
+              <button type="submit" className="px-4 py-2 bg-[var(--accent)] text-white rounded-lg hover:opacity-90 btn-glow">{editing ? "Save" : "Create"}</button>
+              <button type="button" onClick={closeForm} className="px-4 py-2 border border-[var(--border)] text-[var(--accent)] rounded-lg hover:bg-[var(--accent)]/10">Cancel</button>
             </div>
           </form>
         </div>
@@ -199,20 +199,20 @@ export default function TasksPage() {
 
       <div className="glass-panel rounded-xl overflow-hidden">
         {loading ? (
-          <p className="p-6 text-red-400/80">Loading…</p>
+          <p className="p-6 text-[var(--accent)]/80">Loading…</p>
         ) : filteredList.length === 0 ? (
-          <p className="p-6 text-slate-500">
+          <p className="p-6 text-[var(--muted)]">
             {filter === "mine" ? "No tasks assigned to you." : "No tasks yet. Create one to get started."}
           </p>
         ) : (
           <table className="w-full">
-            <thead className="bg-slate-800/50 border-b border-red-500/20">
+            <thead className="bg-[var(--table-header)] border-b border-[var(--border)]">
               <tr>
-                <th className="text-left text-sm font-medium text-red-400 px-4 py-3">Task</th>
-                <th className="text-left text-sm font-medium text-red-400 px-4 py-3">Priority</th>
-                <th className="text-left text-sm font-medium text-red-400 px-4 py-3">Assigned to</th>
-                <th className="text-left text-sm font-medium text-red-400 px-4 py-3">Due date</th>
-                <th className="text-left text-sm font-medium text-red-400 px-4 py-3">Status</th>
+                <th className="text-left text-sm font-medium text-[var(--accent)] px-4 py-3">Task</th>
+                <th className="text-left text-sm font-medium text-[var(--accent)] px-4 py-3">Priority</th>
+                <th className="text-left text-sm font-medium text-[var(--accent)] px-4 py-3">Assigned to</th>
+                <th className="text-left text-sm font-medium text-[var(--accent)] px-4 py-3">Due date</th>
+                <th className="text-left text-sm font-medium text-[var(--accent)] px-4 py-3">Status</th>
                 <th className="w-40" />
               </tr>
             </thead>
@@ -220,33 +220,33 @@ export default function TasksPage() {
               {filteredList.map((t) => {
                 const isOverdue = t.dueDate && new Date(t.dueDate) < new Date();
                 return (
-                  <tr key={t._id} className="border-b border-red-500/10 hover:bg-slate-800/30">
+                  <tr key={t._id} className="border-b border-[var(--border)] hover:bg-[var(--table-row-hover)]">
                     <td className="px-4 py-3">
-                      <p className="font-medium text-white">{t.title}</p>
-                      {t.description && <p className="text-sm text-slate-500 truncate max-w-xs">{t.description}</p>}
+                      <p className="font-medium text-[var(--foreground)]">{t.title}</p>
+                      {t.description && <p className="text-sm text-[var(--muted)] truncate max-w-xs">{t.description}</p>}
                     </td>
                     <td className="px-4 py-3">
                       <span className={`inline-block text-xs font-medium px-2 py-0.5 rounded ${
-                        t.priority === "high" ? "bg-red-500/20 text-red-400" : t.priority === "low" ? "bg-slate-700 text-slate-400" : "bg-amber-500/20 text-amber-400"
+                        t.priority === "high" ? "bg-red-500/20 text-[var(--accent)]" : t.priority === "low" ? "bg-[var(--surface-hover)] text-[var(--muted)]" : "bg-amber-500/20 text-amber-400"
                       }`}>
                         {t.priority ?? "medium"}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-slate-400">{t.assigneeId?.name ?? "—"}</td>
-                    <td className={`px-4 py-3 ${isOverdue ? "text-red-400 font-medium" : "text-slate-400"}`}>
+                    <td className="px-4 py-3 text-[var(--muted)]">{t.assigneeId?.name ?? "—"}</td>
+                    <td className={`px-4 py-3 ${isOverdue ? "text-[var(--accent)] font-medium" : "text-[var(--muted)]"}`}>
                       {t.dueDate ? new Date(t.dueDate).toLocaleDateString() : "—"}
                       {isOverdue && t.dueDate && <span className="ml-1 text-xs">(overdue)</span>}
                     </td>
                     <td className="px-4 py-3">
-                      <select value={t.status} onChange={(e) => updateStatus(t._id, e.target.value)} className="text-sm border border-red-500/30 rounded-lg px-2 py-1 bg-slate-900/80 text-red-400 focus:ring-1 focus:ring-red-400/50">
+                      <select value={t.status} onChange={(e) => updateStatus(t._id, e.target.value)} className="text-sm border border-[var(--border)] rounded-lg px-2 py-1 bg-[var(--input-bg)] text-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/50">
                         {STATUSES.map((s) => (
                           <option key={s} value={s}>{s.replace("_", " ")}</option>
                         ))}
                       </select>
                     </td>
                     <td className="px-4 py-3">
-                      <button onClick={() => openEdit(t)} className="text-red-400 text-sm hover:underline mr-2">Edit</button>
-                      <button onClick={() => del(t._id)} className="text-red-400 text-sm hover:underline">Delete</button>
+                      <button onClick={() => openEdit(t)} className="text-[var(--accent)] text-sm hover:underline mr-2">Edit</button>
+                      <button onClick={() => del(t._id)} className="text-[var(--accent)] text-sm hover:underline">Delete</button>
                     </td>
                   </tr>
                 );
